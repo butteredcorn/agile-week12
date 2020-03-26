@@ -1,0 +1,15 @@
+{
+  "name": "filter-app",
+  "version": "1.0.0",
+  "description": "always npm install -D jest (add to developer dependencies)",
+  "main": "filterapp.js",
+  "dependencies": {
+    "jest": "^25.2.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC"
+}
