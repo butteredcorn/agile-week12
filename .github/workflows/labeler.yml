@@ -1,0 +1,13 @@
+# Add 'repo' label to any root file changes
+repo:
+  - ./*
+  
+# Add 'sort' label to any change within the 'sort' package
+sort:
+  - ./merge-sort/*
+  - ./merge-sort/**/*
+
+# Add 'test' label to any change to *.test.js files within the source dir
+test:
+  - ./test/*.test.js
+  - ./test/**/*.test.js
