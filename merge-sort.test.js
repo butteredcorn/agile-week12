@@ -19,6 +19,17 @@ describe('positive test of expected default sorting behavior', () => {
         expect(sort(input)).toEqual(output)
     })
 
+    test('sort mixed cased strings by first letter', () => {
+        const input = ['dog', 'cat', 'Bird', 'lizard', 'hippo']
+        const output = ['Bird', 'cat', 'dog', 'hippo', 'lizard']
+        expect(sort(input)).toEqual(output)
+    })
+
+    test('sort mixed numbers and strings', () => {
+        const input = ['dog', 2, 'cat', 6, 'Bird', 9, 'lizard', -1, 'hippo']
+        const output = [-1, 2, 6, 9, 'Bird', 'cat', 'dog', 'hippo', 'lizard']
+        expect(sort(input)).toEqual(output)
+    })
 })
 
 describe('positive test of options', () => {
@@ -27,7 +38,8 @@ describe('positive test of options', () => {
         const output = [10, 8, 6, 5, 3, 2, 0]
         const options = {
             allowFalseyElements: false,
-            reverseSort: true
+            reverseSort: true,
+            'handleMixedNumberAndStrings': true
         }
         expect(sort(input, options)).toEqual(output)
     })
@@ -37,7 +49,19 @@ describe('positive test of options', () => {
         const output = [null, undefined, undefined]
         const options = {
             allowFalseyElements: true,
-            reverseSort: false
+            reverseSort: false,
+            'handleMixedNumberAndStrings': true
+        }
+        expect(sort(input, options)).toEqual(output)
+    })
+
+    test('disable handleMixedNumberAndStrings', () => {
+        const input = ['dog', 2, 'cat', 6, 'Bird', 9, 'lizard', -1, 'hippo']
+        const output = [ 'hippo', -1, 'lizard', 2, 6, 9, 'Bird', 'cat', 'dog' ]
+        const options = {
+            allowFalseyElements: false,
+            reverseSort: false,
+            'handleMixedNumberAndStrings': false
         }
         expect(sort(input, options)).toEqual(output)
     })
