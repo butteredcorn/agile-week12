@@ -45,9 +45,62 @@ const merge = (left, right) => {
     return result
 }
 
+//detect presence of number, return true at first sight
+const detectNumber = (array) => {
+    for(element of array) {
+        if(typeof element == "number") {
+            return true;
+        }
+    }
+    return false;
+}
+
+//detect presence of string, return true at first sight
+const detectString = (array) => {
+    for(element of array) {
+        if(typeof element == "string") {
+            return true;
+        }
+    }
+    return false;
+}
+
+//detect if array contains both arrays and numbers
+//worst case bigO = n
+const detectMixedNumberAndStrings = (array) => {
+    const numbers = detectNumber(array)
+    const strings = detectString(array)
+    if(numbers && strings) {
+        return true
+    } else {
+        return false
+    }
+}
+
+//split array into numbers and strings, mergeSort both of them individual, remerge them after
+const handleMixedNumberAndStrings = (array) => {
+    const numbersArray = []
+    const stringsArray = []
+    for(element of array) {
+        if(typeof element == "number") {
+            numbersArray.push(element)
+        }
+        if(typeof element == "string") {
+            stringsArray.push(element)
+        }
+    }
+
+    const sortedNumbers = mergeSort(numbersArray)
+    const sortedStrings = mergeSort(stringsArray)
+
+    return merge(sortedStrings, sortedNumbers)
+}
+
+//default options
 const defaultOptions = {
     allowFalseyElements: false,
-    reverseSort: false
+    reverseSort: false,
+    'handleMixedNumberAndStrings': true
 }
 
 const main = (input, options = defaultOptions) => {
@@ -64,13 +117,28 @@ const main = (input, options = defaultOptions) => {
             }
         }
 
-        if(options.reverseSort) {
-            return (mergeSort(input)).reverse()
+        if(!options.handleMixedNumberAndStrings) {
+            console.log(`Warning: Disabling handleMixedNumberAndStrings can lead to unexpected results.`)
         }
 
+        //detect reverse option
+        if(options.reverseSort) {
+            if(options.handleMixedNumberAndStrings && detectMixedNumberAndStrings(input)) {
+                return handleMixedNumberAndStrings(input)
+            } else {
+                return (mergeSort(input)).reverse()
+            }
+        }
+
+        if(options.handleMixedNumberAndStrings && detectMixedNumberAndStrings(input)) {
+            return handleMixedNumberAndStrings(input)
+        }
         return mergeSort(input)
     }
 }
+
+// console.log(main(['dog', 2, 'cat', 6, 'Bird', 9, 'lizard', -1, 'hippo']))
+// console.log(['dog', 2, 'cat', 6, 'Bird', 9, 'lizard', -1, 'hippo'].sort())
 
 module.exports = {
     main
