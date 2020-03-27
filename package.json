@@ -1,15 +1,22 @@
 {
-  "name": "filter-app",
+  "name": "merge-sort",
   "version": "1.0.0",
-  "description": "always npm install -D jest (add to developer dependencies)",
-  "main": "filterapp.js",
-  "dependencies": {
-    "jest": "^25.2.2"
-  },
-  "devDependencies": {},
+  "description": "",
+  "main": "merge-sort.js",
   "scripts": {
     "test": "jest"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/butteredcorn/agile-week12.git"
+  },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/butteredcorn/agile-week12/issues"
+  },
+  "homepage": "https://github.com/butteredcorn/agile-week12#readme",
+  "dependencies": {
+    "jest": "^25.2.3"
+  }
 }
